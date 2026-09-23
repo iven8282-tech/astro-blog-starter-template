@@ -1,0 +1,20 @@
+{
+  "alibabaLinksInside": [],
+  "allHrefsInside": [
+    "mailto:iven@kidsdoing.com",
+    "tel:+8615377609510"
+  ],
+  "hasForm": true,
+  "inSitePopup": true,
+  "inputs": [
+    "INPUT:text",
+    "INPUT:email",
+    "SELECT:select-one",
+    "TEXTAREA:textarea"
+  ],
+  "modalClass": "modal",
+  "modalClosedAfterDismiss": true,
+  "submitButtons": [
+    "Send Inquiry"
+  ]
+}

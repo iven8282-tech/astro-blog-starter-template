@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "siteId": "c3g3w7mssy7ziwt7",
+  "name": "kidsdodoing-site",
+  "kind": "react-vite",
+  "devCommand": "vite",
+  "buildCommand": "vite build",
+  "outputDir": "dist",
+  "entry": "index.html",
+  "createdBy": "accio-site-builder",
+  "createdAt": "2026-09-10T07:08:07.655Z",
+  "siteIdSyncStatus": "synced",
+  "installedAt": "2026-09-10T07:17:59.273Z",
+  "databaseUrl": "",
+  "subdomain": "kidsdodoing",
+  "publishedUrl": "https://kidsdodoing.site.accio.ai",
+  "publishedAt": "2026-09-18T08:43:28.857Z",
+  "deployId": "dep_1789721003649_45d42367"
+}

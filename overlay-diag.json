@@ -1,0 +1,31 @@
+{
+  "cardChildren": [
+    "BUTTON.",
+    "DIV.catalog-image",
+    "IMG.",
+    "DIV.catalog-body",
+    "H4.",
+    "DIV.catalog-specs",
+    "SPAN.",
+    "SPAN.",
+    "SPAN.catalog-cta",
+    "svg.",
+    "path.",
+    "path."
+  ],
+  "cardCursor": "auto",
+  "cardRole": null,
+  "cardTabIndex": null,
+  "overlayCount": 1,
+  "overlays": [
+    {
+      "cls": "chrome_container",
+      "h": 1279,
+      "pos": "fixed",
+      "tag": "DIV",
+      "text": "",
+      "w": 2545,
+      "z": "2147483647"
+    }
+  ]
+}

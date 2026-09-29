@@ -28,7 +28,17 @@ const contactInfo = {
   email: 'iven@kidsdoing.com',
   phone: '+86 15377609510',
   address: 'Unit4-3, Xingang International Furniture Park, Yangluo Town, Xinzhou District, Hubei, China',
+  facebook: 'https://facebook.com/ivenzwa',
+  tiktok: 'https://tiktok.com/@ivenzhou',
 };
+
+function FacebookIcon({ size = 16 }) {
+  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>;
+}
+
+function TikTokIcon({ size = 16 }) {
+  return <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.47 6.27 6.27 0 0 0 1.99-4.47V8.58a8.27 8.27 0 0 0 4.84 1.56V6.69z"/></svg>;
+}
 
 const languages = [
   { code: 'en', label: 'English' },
@@ -101,6 +111,8 @@ function ContactList({ compact = false }) {
   return <div className={compact ? 'contact-list compact' : 'contact-list'}>
     <a href={`mailto:${contactInfo.email}`}><Mail size={16} /><span>{contactInfo.email}</span></a>
     <a href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}><Phone size={16} /><span>{contactInfo.phone}</span></a>
+    <a href={contactInfo.facebook} target="_blank" rel="noopener noreferrer"><FacebookIcon size={16} /><span>Facebook: @ivenzwa</span></a>
+    <a href={contactInfo.tiktok} target="_blank" rel="noopener noreferrer"><TikTokIcon size={16} /><span>TikTok: @ivenzhou</span></a>
     <div><MessageCircle size={16} /><span>WhatsApp / WeChat: {contactInfo.phone}</span></div>
     <div><MapPin size={16} /><span>{contactInfo.address}</span></div>
   </div>;
@@ -169,7 +181,7 @@ function App() {
 
       <section className="section container inquiry-section" id="contact" data-component="inquiry-band"><div className="inquiry-panel"><div><p className="eyebrow">{t.navContact}</p><h2>{t.contactTitleA} <em>{t.contactTitleB}</em></h2><p>{t.contactCopy}</p><ContactList /></div><button className="button button-accent" onClick={() => openInquiry()}>{t.sendInquiry} <Send size={17} /></button></div></section>
     </main>
-    <footer className="footer container" data-component="site-footer"><div><Logo /><p className="footer-copy">Soft-play products and textile solutions for children’s spaces, private-label brands and international buyers.</p></div><div className="footer-column"><span className="footer-label">{t.footerExplore}</span><a href="#collections">{t.productGroups}</a><a href="#catalog">{t.fullCatalog}</a><a href="#process">OEM / ODM</a><a href="#story">{t.ourStory}</a></div><div className="footer-column"><span className="footer-label">{t.footerContact}</span><a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a><a href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}>{contactInfo.phone}</a><span>WhatsApp / WeChat</span><span>{contactInfo.address}</span></div><div className="footer-column"><span className="footer-label">{t.footerCompliance}</span>{certifications.map((cert) => <a href={`#${cert.slug}`} key={cert.name}>{cert.name}</a>)}</div><div className="footer-bottom"><span>© {new Date().getFullYear()} Wuhan Kunxiang Textile Technology Co., Ltd.</span><span>kidsdodoing.com</span></div></footer>
+    <footer className="footer container" data-component="site-footer"><div><Logo /><p className="footer-copy">Soft-play products and textile solutions for children’s spaces, private-label brands and international buyers.</p></div><div className="footer-column"><span className="footer-label">{t.footerExplore}</span><a href="#collections">{t.productGroups}</a><a href="#catalog">{t.fullCatalog}</a><a href="#process">OEM / ODM</a><a href="#story">{t.ourStory}</a></div><div className="footer-column"><span className="footer-label">{t.footerContact}</span><a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a><a href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}>{contactInfo.phone}</a><a href={contactInfo.facebook} target="_blank" rel="noopener noreferrer">Facebook: @ivenzwa</a><a href={contactInfo.tiktok} target="_blank" rel="noopener noreferrer">TikTok: @ivenzhou</a><span>WhatsApp / WeChat</span><span>{contactInfo.address}</span></div><div className="footer-column"><span className="footer-label">{t.footerCompliance}</span>{certifications.map((cert) => <a href={`#${cert.slug}`} key={cert.name}>{cert.name}</a>)}</div><div className="footer-bottom"><span>© {new Date().getFullYear()} Wuhan Kunxiang Textile Technology Co., Ltd.</span><span>kidsdodoing.com</span></div></footer>
     {inquiryOpen && <InquiryModal onClose={closeInquiry} product={selectedProduct} />}
     {selectedCertificate && <CertificateModal certificate={selectedCertificate} onClose={() => setSelectedCertificate(null)} />}
   </div>;

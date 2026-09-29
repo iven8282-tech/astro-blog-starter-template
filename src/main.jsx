@@ -99,16 +99,36 @@ function Header({ onInquiry, lang, setLang, t, onSelectCategory }) {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const handleCategoryClick = (e, slug) => {
+  const jumpToCategory = (e, slug) => {
     e.preventDefault();
     onSelectCategory(slug);
     setOpen(false);
     setDropdownOpen(false);
     const catalogEl = document.getElementById('catalog');
     if (catalogEl) {
-      catalogEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      window.location.hash = 'catalog';
+      const headerOffset = 80;
+      const elementPosition = catalogEl.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'auto'
+      });
+    }
+  };
+
+  const jumpToCatalog = (e) => {
+    e.preventDefault();
+    setOpen(false);
+    setDropdownOpen(false);
+    const catalogEl = document.getElementById('catalog');
+    if (catalogEl) {
+      const headerOffset = 80;
+      const elementPosition = catalogEl.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'auto'
+      });
     }
   };
 
@@ -125,12 +145,7 @@ function Header({ onInquiry, lang, setLang, t, onSelectCategory }) {
         <a 
           href="#catalog" 
           className="nav-dropdown-trigger" 
-          onClick={(e) => {
-            e.preventDefault();
-            setOpen(false);
-            setDropdownOpen(false);
-            document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }}
+          onClick={jumpToCatalog}
         >
           {t.navCatalog}
           <ChevronDown size={14} className={dropdownOpen ? 'dropdown-arrow rotate' : 'dropdown-arrow'} />
@@ -141,9 +156,9 @@ function Header({ onInquiry, lang, setLang, t, onSelectCategory }) {
             {productCatalog.map((group, index) => (
               <a 
                 key={group.slug} 
-                href="#catalog" 
+                href={`#${group.slug}`} 
                 className="dropdown-item" 
-                onClick={(e) => handleCategoryClick(e, group.slug)}
+                onClick={(e) => jumpToCategory(e, group.slug)}
               >
                 <span className="dropdown-index">G{String(index + 1).padStart(2, '0')}</span>
                 <span className="dropdown-name">{group.group}</span>
@@ -222,7 +237,7 @@ function App() {
 
       <section className="cert-strip" id="compliance" data-component="certification-strip"><div className="container cert-strip-inner"><span className="strip-label">{t.audited}</span><div className="cert-list">{certifications.map((cert) => <a href={`#${cert.slug}`} key={cert.name}>{cert.name}</a>)}</div></div></section>
 
-      <section className="section container" id="collections" data-component="category-bento"><div className="section-heading"><div><p className="eyebrow">{t.productGroups}</p><h2>{t.groupsTitleA}<br /><em>{t.groupsTitleB}</em></h2></div><p>{t.groupsCopy}</p></div><div className="product-grid">{products.map((product, index) => <article className={`product-card ${index < 2 ? 'product-card-large' : ''}`} key={product.name}><button className="product-card-button" type="button" onClick={() => { const matching = productCatalog[index]; if (matching) { setActiveCatalogSlug(matching.slug); document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }}><div className="product-image"><img src={product.image} alt={product.name} loading="lazy" /><span className="product-arrow"><ArrowRight size={17} /></span></div><div className="product-meta"><div><span className="group-index">Group {String(index + 1).padStart(2, '0')}</span><h3>{product.name}</h3><p>{product.nameZh}</p></div><span className="product-link">{t.inquireNow}</span></div><p className="product-summary">{product.summary}</p></button></article>)}</div></section>
+      <section className="section container" id="collections" data-component="category-bento"><div className="section-heading"><div><p className="eyebrow">{t.productGroups}</p><h2>{t.groupsTitleA}<br /><em>{t.groupsTitleB}</em></h2></div><p>{t.groupsCopy}</p></div><div className="product-grid">{products.map((product, index) => <article className={`product-card ${index < 2 ? 'product-card-large' : ''}`} key={product.name}><button className="product-card-button" type="button" onClick={() => { const matching = productCatalog[index]; if (matching) { setActiveCatalogSlug(matching.slug); const catalogEl = document.getElementById('catalog'); if (catalogEl) { const headerOffset = 80; const elementPosition = catalogEl.getBoundingClientRect().top; const offsetPosition = elementPosition + window.pageYOffset - headerOffset; window.scrollTo({ top: offsetPosition, behavior: 'auto' }); } } }}><div className="product-image"><img src={product.image} alt={product.name} loading="lazy" /><span className="product-arrow"><ArrowRight size={17} /></span></div><div className="product-meta"><div><span className="group-index">Group {String(index + 1).padStart(2, '0')}</span><h3>{product.name}</h3><p>{product.nameZh}</p></div><span className="product-link">{t.inquireNow}</span></div><p className="product-summary">{product.summary}</p></button></article>)}</div></section>
 
       <ProductCatalog onProductInquiry={openInquiry} t={t} activeSlug={activeCatalogSlug} setActiveSlug={setActiveCatalogSlug} />
 

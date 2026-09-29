@@ -7,7 +7,6 @@
   font-family: Inter, "Segoe UI", system-ui, -apple-system, sans-serif; color: var(--ink); background: var(--canvas);
 }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--canvas); color: var(--ink); }
 body, button, input, select, textarea { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }

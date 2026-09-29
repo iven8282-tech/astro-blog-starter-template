@@ -5,14 +5,14 @@ import './styles.css';
 import { productCatalog } from './productCatalog.js';
 
 const products = [
-  { name: 'Kids Modular Sofa', nameZh: '儿童模块沙发', image: 'https://sc04.alicdn.com/kf/H1a07a9f9713d47bc9247d25b2699c9fet.jpg', summary: 'Soft, rearrangeable seating for playrooms, nurseries and family spaces.' },
+  { name: 'Kids Modular Sofa/Floor Couch', nameZh: '儿童模块沙发', image: 'https://sc04.alicdn.com/kf/H1a07a9f9713d47bc9247d25b2699c9fet.jpg', summary: 'Soft, rearrangeable seating for playrooms, nurseries and family spaces.' },
   { name: 'Foam Climber Block', nameZh: '泡沫攀爬块', image: 'https://sc04.alicdn.com/kf/H49e69da433e24a2baa5faf648217ac61Z.jpg', summary: 'Modular foam forms that turn movement into open-ended play.' },
-  { name: 'Ball Pit', nameZh: '儿童球池', image: 'https://sc04.alicdn.com/kf/H2425833ae7544f818cf41db93d7abddcU.jpg', summary: 'A soft-play staple designed for indoor play areas and retail collections.' },
-  { name: 'Baby sofa', nameZh: '婴儿沙发', image: 'https://sc04.alicdn.com/kf/H68b1c495ff5045919e0e47b774445a8cg.jpg', summary: 'Compact soft seating with a calm, nursery-friendly silhouette.' },
-  { name: 'Hot-selling sofa bed', nameZh: '热销沙发床', image: 'https://sc04.alicdn.com/kf/H2d0b6fccb5d1487b9ec0bea36bfad9f5M.png', summary: 'A flexible rest-and-play format for children’s rooms and hospitality.' },
-  { name: 'Kids Lazy Sofa', nameZh: '儿童懒人沙发', image: 'https://sc04.alicdn.com/kf/H0e29b6b7f7b04ab995e03960123df5a9w.png', summary: 'Relaxed, lightweight seating that is easy to style and reposition.' },
+  { name: 'Kids Play Sofa Bed', nameZh: '儿童沙发床', image: 'https://sc04.alicdn.com/kf/H2d0b6fccb5d1487b9ec0bea36bfad9f5M.png', summary: 'A flexible rest-and-play format for children’s rooms and hospitality.' },
+  { name: 'Kids/Baby Single Sofa', nameZh: '婴儿/儿童单人沙发', image: 'https://sc04.alicdn.com/kf/H68b1c495ff5045919e0e47b774445a8cg.jpg', summary: 'Compact soft seating with a calm, nursery-friendly silhouette.' },
+  { name: 'Popular Foam Ball Pit', nameZh: '儿童球池', image: 'https://sc04.alicdn.com/kf/H2425833ae7544f818cf41db93d7abddcU.jpg', summary: 'A soft-play staple designed for indoor play areas and retail collections.' },
+  { name: 'Foam Playmat', nameZh: '泡沫游戏垫', image: 'https://sc04.alicdn.com/kf/H0e29b6b7f7b04ab995e03960123df5a9w.png', summary: 'Cushioned floor mats designed for infant and toddler activity zones.' },
   { name: 'Hot-selling Sensory Toys', nameZh: '热销感官玩具', image: 'https://sc04.alicdn.com/kf/Hb16776ef97d649dca9cadb1b30969169m.jpg', summary: 'Soft accessories and sensory play pieces to build a complete collection.' },
-  { name: 'Cushion & Pillow Foam', nameZh: '坐垫与枕垫', image: 'https://sc04.alicdn.com/kf/Hff67efad92b44868a8fba7306008b3d8g.jpg', summary: 'Foam-based comfort cushions and pillow products for private-label programs.' },
+  { name: 'Other Cushion&Pillow foam products', nameZh: '坐垫与枕垫', image: 'https://sc04.alicdn.com/kf/Hff67efad92b44868a8fba7306008b3d8g.jpg', summary: 'Foam-based comfort cushions and pillow products for private-label programs.' },
 ];
 
 const certifications = [

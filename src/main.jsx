@@ -19,7 +19,6 @@ const certifications = [
   { name: 'ISO 9001', slug: 'iso-9001', summary: 'Quality management system certification for manufacturing operations.', image: 'https://sc04.alicdn.com/kf/A23796314fa0d451e99660a59ad6c0125Q.jpg', status: 'Certificate ZK2025060256895 · valid until 2028-08-21' },
   { name: 'ISO 14001', slug: 'iso-14001', summary: 'Environmental management system certification.', image: 'https://sc04.alicdn.com/kf/Af2afbd3e58824cf6823655e75057c3a6z.jpg', status: 'Certificate ZK2026060258572 · valid until 2029-04-12' },
   { name: 'REACH', slug: 'reach', summary: 'Chemical safety test report summary for EU REACH requirements.', image: 'https://sc04.alicdn.com/kf/Aa8290c7f964d48c189ea7e1018426123F.jpg', status: 'Conclusion: PASS' },
-  { name: 'ROHS', slug: 'rohs', summary: 'RoHS compliance document available on request.', image: '', status: 'Document available on request' },
 ];
 const regions = [['North America', 20], ['Western Europe', 15], ['Southern Europe', 15], ['Northern Europe', 15], ['Eastern Europe', 15], ['South America', 10]];
 const contactInfo = {

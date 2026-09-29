@@ -95,13 +95,54 @@ function Logo() {
   return <a className="logo" href="#top" aria-label="KidsDodoDoing home"><span className="logo-mark">K</span><span>kids<span>dodoing</span></span></a>;
 }
 
-function Header({ onInquiry, lang, setLang, t }) {
+function Header({ onInquiry, lang, setLang, t, onSelectCategory }) {
   const [open, setOpen] = useState(false);
-  const nav = [[t.navCollections, '#collections'], [t.navCatalog, '#catalog'], [t.navOem, '#process'], [t.navCompliance, '#certifications'], [t.navContact, '#contact']];
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
   return <header className="site-header" data-component="site-header">
     <Logo />
     <nav className={open ? 'nav open' : 'nav'} aria-label="Main navigation">
-      {nav.map(([label, href]) => <a key={label} href={href} onClick={() => setOpen(false)}>{label}</a>)}
+      <a href="#collections" onClick={() => setOpen(false)}>{t.navCollections}</a>
+      
+      <div 
+        className="nav-dropdown-wrapper"
+        onMouseEnter={() => setDropdownOpen(true)}
+        onMouseLeave={() => setDropdownOpen(false)}
+      >
+        <a 
+          href="#catalog" 
+          className="nav-dropdown-trigger" 
+          onClick={() => { setOpen(false); setDropdownOpen(false); }}
+        >
+          {t.navCatalog}
+          <ChevronDown size={14} className={dropdownOpen ? 'dropdown-arrow rotate' : 'dropdown-arrow'} />
+        </a>
+        <div className={dropdownOpen ? 'nav-dropdown-menu open' : 'nav-dropdown-menu'}>
+          <div className="dropdown-header">8 Product Categories</div>
+          <div className="dropdown-list">
+            {productCatalog.map((group, index) => (
+              <a 
+                key={group.slug} 
+                href="#catalog" 
+                className="dropdown-item" 
+                onClick={() => { 
+                  onSelectCategory(group.slug); 
+                  setOpen(false); 
+                  setDropdownOpen(false); 
+                }}
+              >
+                <span className="dropdown-index">G{String(index + 1).padStart(2, '0')}</span>
+                <span className="dropdown-name">{group.group}</span>
+                <span className="dropdown-count">{group.products.length}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <a href="#process" onClick={() => setOpen(false)}>{t.navOem}</a>
+      <a href="#certifications" onClick={() => setOpen(false)}>{t.navCompliance}</a>
+      <a href="#contact" onClick={() => setOpen(false)}>{t.navContact}</a>
     </nav>
     <div className="header-actions"><label className="language"><span className="sr-only">Language</span><select value={lang} onChange={(event) => setLang(event.target.value)}>{languages.map((item) => <option value={item.code} key={item.code}>{item.label}</option>)}</select><ChevronDown size={14} /></label><button className="button button-small button-accent" onClick={onInquiry}>{t.getQuote} <ArrowRight size={16} /></button><button className="menu-button" aria-label={open ? 'Close menu' : 'Open menu'} onClick={() => setOpen(!open)}>{open ? <X size={22} /> : <Menu size={22} />}</button></div>
   </header>;
@@ -131,8 +172,7 @@ function CertificationsSection({ onCertificateOpen, t }) {
   return <section className="section container certification-section" id="certifications" data-component="certification-gallery"><div className="section-heading"><div><p className="eyebrow">{t.certEyebrow}</p><h2>{t.certTitleA}<br /><em>{t.certTitleB}</em></h2></div><p>{t.certCopy}</p></div><div className="certificate-grid">{certifications.map((certificate) => <article className="certificate-card" id={certificate.slug} key={certificate.name}><button type="button" onClick={() => onCertificateOpen(certificate)}><div className="certificate-thumb">{certificate.image ? <img src={certificate.image} alt={`${certificate.name} certificate thumbnail`} loading="lazy" /> : <div className="certificate-placeholder"><ShieldCheck size={28} /><span>Available on request</span></div>}<span className="certificate-badge"><ShieldCheck size={14} /> Verified file</span></div><div className="certificate-copy"><h3>{certificate.name}</h3><p>{certificate.summary}</p><small>{certificate.status}</small></div></button></article>)}</div></section>;
 }
 
-function ProductCatalog({ onProductInquiry, t }) {
-  const [activeSlug, setActiveSlug] = useState(productCatalog[0]?.slug || '');
+function ProductCatalog({ onProductInquiry, t, activeSlug, setActiveSlug }) {
   const activeGroup = useMemo(() => productCatalog.find((group) => group.slug === activeSlug) || productCatalog[0], [activeSlug]);
   const totalProducts = productCatalog.reduce((sum, group) => sum + group.products.length, 0);
 
@@ -153,12 +193,13 @@ function App() {
   const [inquiryOpen, setInquiryOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedCertificate, setSelectedCertificate] = useState(null);
+  const [activeCatalogSlug, setActiveCatalogSlug] = useState(productCatalog[0]?.slug || '');
   const t = translations[lang] || translations.en;
   const openInquiry = (product = null) => { setSelectedProduct(product); setInquiryOpen(true); };
   const closeInquiry = () => { setInquiryOpen(false); setSelectedProduct(null); };
 
   return <div id="top" className="site-shell" lang={lang}>
-    <Header onInquiry={() => openInquiry()} lang={lang} setLang={setLang} t={t} />
+    <Header onInquiry={() => openInquiry()} lang={lang} setLang={setLang} t={t} onSelectCategory={setActiveCatalogSlug} />
     <main>
       <section className="hero container" data-component="hero">
         <div className="hero-copy"><p className="eyebrow"><Sparkles size={14} /> Wuhan Kunxiang Textile Technology Co., Ltd. · KidsDodoDoing®</p><h1>{t.heroTitleA}<br /><em>{t.heroTitleB}</em></h1><p className="hero-lede">{t.heroLede}</p><div className="hero-actions"><button className="button button-accent" onClick={() => openInquiry()}>{t.getQuote} <ArrowRight size={18} /></button><a className="button button-ghost" href="#collections">{t.browseGroups} <ArrowRight size={18} /></a></div><div className="trust-row">{certifications.map((cert) => <a href={`#${cert.slug}`} key={cert.name}><ShieldCheck size={14} /> {cert.name}</a>)}</div></div>
@@ -169,7 +210,7 @@ function App() {
 
       <section className="section container" id="collections" data-component="category-bento"><div className="section-heading"><div><p className="eyebrow">{t.productGroups}</p><h2>{t.groupsTitleA}<br /><em>{t.groupsTitleB}</em></h2></div><p>{t.groupsCopy}</p></div><div className="product-grid">{products.map((product, index) => <article className={`product-card ${index < 2 ? 'product-card-large' : ''}`} key={product.name}><button className="product-card-button" type="button" onClick={() => openInquiry({ title: product.name, group: product.name, price: 'Bulk quote', moq: 'MOQ varies by item' })}><div className="product-image"><img src={product.image} alt={product.name} loading="lazy" /><span className="product-arrow"><ArrowRight size={17} /></span></div><div className="product-meta"><div><span className="group-index">Group {String(index + 1).padStart(2, '0')}</span><h3>{product.name}</h3><p>{product.nameZh}</p></div><span className="product-link">{t.inquireNow}</span></div><p className="product-summary">{product.summary}</p></button></article>)}</div></section>
 
-      <ProductCatalog onProductInquiry={openInquiry} t={t} />
+      <ProductCatalog onProductInquiry={openInquiry} t={t} activeSlug={activeCatalogSlug} setActiveSlug={setActiveCatalogSlug} />
 
       <section className="section section-mint" id="process" data-component="oem-process-rail"><div className="container"><div className="section-heading"><div><p className="eyebrow">OEM / ODM</p><h2>{t.oemTitleA}<br /><em>{t.oemTitleB}</em></h2></div><p>{t.oemCopy}</p></div><div className="process-grid">{[['01', 'Brief & design', 'Translate your product idea into materials, forms and a production brief.'], ['02', 'Sampling', 'Review a physical sample and align on details before production.'], ['03', 'Production & QC', 'Sewing, foam work and quality checks in one coordinated flow.'], ['04', 'Export & documentation', 'FOB, CIF, EXW, FCA, DDP, DDU and express delivery options.']].map(([number, title, copy]) => <div className="process-step" key={number}><span className="step-number">{number}</span><h3>{title}</h3><p>{copy}</p></div>)}</div></div></section>
 
